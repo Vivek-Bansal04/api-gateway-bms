@@ -1,0 +1,26 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: API-GATEWAY
+
+  cloud:
+    gateway:
+      routes:
+        - id: BMS-SERVICE
+          uri: lb://BMS-SERVICE
+          predicates:
+            - Paths=/cities/**, /actors/**, /bookings/**, /movies/**, /shows/**, /theatres/**, /users/**
+        - id: AUTH-SERVICE
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Paths=/user/**, /otp/**
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
