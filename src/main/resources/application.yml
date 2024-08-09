@@ -21,6 +21,8 @@ spring:
           uri: lb://BMS-SERVICE
           predicates:
             - Path=/cities/**,/actors/**,/theatres/**,/bookings/**,/movies/**,/shows/**, /users/**
+          filters:
+            - AuthenticationFilter
         - id: AUTH-SERVICE
           uri: lb://AUTH-SERVICE
           predicates:
